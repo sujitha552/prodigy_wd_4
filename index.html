@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio — Comillas Negras Theme</title>
+  <style>
+    /* Base & reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #eee;
+      background: #0a0a0a; /* dark background */
+      overflow-x: hidden;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Stars pattern background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200vw;
+      height: 200vh;
+      background: url('stars-pattern.png') repeat; 
+      /* You should supply a star pattern image named stars-pattern.png or change URL */
+      opacity: 0.15;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    header.hero {
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+    header.hero img.profile {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      margin-bottom: 1.5rem;
+    }
+    header.hero h1 {
+      font-size: 3rem;
+      color: #f0f0f0;
+      margin-bottom: 1rem;
+      font-family: 'Times New Roman', serif;
+      /* “Comillas Negras” styling: black quotes or decorative quotes */
+      position: relative;
+      display: inline-block;
+    }
+    header.hero h1::before {
+      content: "“";
+      position: absolute;
+      left: -1.2em;
+      top: -0.3em;
+      font-size: 2.5rem;
+      color: #888;
+    }
+    header.hero h1::after {
+      content: "”";
+      position: absolute;
+      right: -1.2em;
+      bottom: -0.3em;
+      font-size: 2.5rem;
+      color: #888;
+    }
+    header.hero p.subtitle {
+      font-size: 1.25rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    header.hero .btn {
+      background: #ffdd57;
+      color: #0a0a0a;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    header.hero .btn:hover {
+      background: #ffd933;
+    }
+
+    /* About Me section */
+    section#about {
+      background: rgba(20, 20, 30, 0.9);
+      padding: 3rem 0;
+      color: #ddd;
+    }
+    section#about h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    section#about .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    section#about .about-content p {
+      line-height: 1.6;
+    }
+    section#about .timeline {
+      margin-top: 2rem;
+    }
+    section#about .timeline-item {
+      margin-bottom: 1.5rem;
+    }
+    section#about .timeline-item h3 {
+      font-size: 1.3rem;
+      color: #ffdd57;
+    }
+    section#about .timeline-item span {
+      display: block;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* Projects section */
+    section#projects {
+      padding: 3rem 0;
+    }
+    section#projects h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #f0f0f0;
+      margin-bottom: 1.5rem;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: rgba(30, 30, 40, 0.95);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+    .project-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .project-card .card-body {
+      padding: 1rem;
+      color: #ddd;
+    }
+    .project-card .card-body h3 {
+      color: #ffdd57;
+      margin-bottom: 0.5rem;
+    }
+    .project-card .card-body p {
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Contact section */
+    section#contact {
+      padding: 3rem 0;
+      background: rgba(10,10,20,0.9);
+      color: #eee;
+    }
+    section#contact h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    form.contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    form.contact-form input,
+    form.contact-form textarea {
+      padding: 0.75rem;
+      border: 1px solid #555;
+      border-radius: 6px;
+      background: #111;
+      color: #eee;
+      font-size: 1rem;
+    }
+    form.contact-form button {
+      padding: 0.75rem;
+      background: #ffdd57;
+      color: #0a0a0a;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form.contact-form button:hover {
+      background: #ffd933;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: #111;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive tweaks */
+    @media (min-width: 768px) {
+      section#about .about-content {
+        flex-direction: row;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <img class="profile" src="your-photo.jpg" alt="Your Name" />
+      <h1>Web Developer & Designer</h1>
+      <p class="subtitle">I craft modern, elegant web experiences that shine — using clean code, beautiful UI, and creative problem solving.</p>
+      <a href="#projects" class="btn">View My Work</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <div class="bio">
+          <p>
+            Hello! I'm [Your Name], a passionate web developer based in [Location]. I started coding when I was young, and over time, I’ve built expertise in frontend and backend technologies. My goal is to create web applications that are not only functional, but delightful to use.
+          </p>
+          <p>
+            I hold a degree in [Your Degree] from [University]. Over the years, I have worked with startups and clients to deliver websites, web apps, and custom solutions using modern stacks.
+          </p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>2023 – Present: Full Stack Developer at ABC Corp</h3>
+            <span>Building client projects, REST APIs, and frontend dashboards.</span>
+          </div>
+          <div class="timeline-item">
+            <h3>2021 – 2023: Frontend Developer at XYZ Studio</h3>
+            <span>Worked on SPA frontends, UI/UX improvements, performance optimizations.</span>
+          </div>
+          <div class="timeline-item">
+            <h3>2019 – 2021: Internship / Junior Developer Roles</h3>
+            <span>Assisted with website development, bug fixes, learning full stack fundamentals.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="project1.jpg" alt="Project 1 screenshot" />
+          <div class="card-body">
+            <h3>Project One</h3>
+            <p>A brief description about what this project does, the features, and tech stack used (HTML, CSS, JS, React, etc.).</p>
+            <a href="https://github.com/yourusername/project1" target="_blank">View on GitHub</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="project2.jpg" alt="Project 2 screenshot" />
+          <div class="card-body">
+            <h3>Project Two</h3>
+            <p>Description of project features, challenges solved, and technologies.</p>
+            <a href="https://github.com/yourusername/project2" target="_blank">View on GitHub</a>
+          </div>
+        </div>
+        <!-- Add more project cards similarly -->
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <form class="contact-form" action="mailto:youremail@example.com" method="POST" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 [Your Name]. All rights reserved.
+  </footer>
+
+</body>
+</html>
